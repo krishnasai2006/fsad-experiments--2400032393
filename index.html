@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Manager</title>
+<style>
+body{font-family:Arial;text-align:center}
+table{margin:auto;border-collapse:collapse;width:60%}
+th,td{border:1px solid gray;padding:8px}
+button{padding:5px 10px}
+input{margin:5px;padding:5px}
+</style>
+</head>
+<body>
+
+<h2>Student Manager (useState Demo)</h2>
+
+<input id="id" placeholder="ID">
+<input id="name" placeholder="Name">
+<input id="course" placeholder="Course">
+<button onclick="addStudent()">Add Student</button>
+
+<p id="empty"></p>
+
+<table id="table">
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Course</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<script>
+
+let students=[
+{id:1,name:"Krishna",course:"CSE"},
+{id:2,name:"Rahul",course:"AIML"},
+{id:3,name:"Sneha",course:"ECE"},
+{id:4,name:"Ravi",course:"IT"},
+{id:5,name:"Anita",course:"DS"}
+]
+
+function render(){
+
+let tbody=document.querySelector("tbody")
+tbody.innerHTML=""
+
+if(students.length===0){
+document.getElementById("empty").innerText="No students available"
+}else{
+document.getElementById("empty").innerText=""
+}
+
+students.forEach(s=>{
+
+let row=`
+<tr>
+<td>${s.id}</td>
+<td>${s.name}</td>
+<td>${s.course}</td>
+<td><button onclick="deleteStudent(${s.id})">Delete</button></td>
+</tr>
+`
+tbody.innerHTML+=row
+
+})
+
+}
+
+function addStudent(){
+
+let id=document.getElementById("id").value
+let name=document.getElementById("name").value
+let course=document.getElementById("course").value
+
+if(!id||!name||!course)return
+
+students.push({id,name,course})
+
+document.getElementById("id").value=""
+document.getElementById("name").value=""
+document.getElementById("course").value=""
+
+render()
+}
+
+function deleteStudent(id){
+students=students.filter(s=>s.id!=id)
+render()
+}
+
+render()
+
+</script>
+
+</body>
+</html>
