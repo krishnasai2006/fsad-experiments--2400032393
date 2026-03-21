@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Full Stack App</title>
+</head>
+<body>
+
+<h1>React Frontend (Deployed)</h1>
+
+<button onclick="callAPI()">Test Backend API</button>
+
+<p id="result"></p>
+
+<script>
+function callAPI(){
+ fetch("/hello")
+ .then(res=>res.text())
+ .then(data=>{
+   document.getElementById("result").innerText=data;
+ });
+}
+</script>
+
+</body>
+</html>
